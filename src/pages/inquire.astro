@@ -521,6 +521,8 @@ import Header from '../components/Header.astro';
     }
   });
 
+  const FORMSPREE_ID = "YOUR_FORMSPREE_ID"; // Replace with your Formspree Form ID
+
   const handleSubmit = () => {
     // Collect form data objects
     const formData = new FormData(form);
@@ -534,9 +536,36 @@ import Header from '../components/Header.astro';
       }
     });
 
-    // Output simulated submission data to console
-    console.log('Artsterix Inquiry Data Submitted:', data);
+    // If ID is default placeholder, mock submission immediately
+    if (FORMSPREE_ID === "YOUR_FORMSPREE_ID") {
+      console.log('Mock Artsterix Submission (no Formspree ID set):', data);
+      showSuccessState();
+      return;
+    }
 
+    // Submit to Formspree
+    fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      if (response.ok) {
+        showSuccessState();
+      } else {
+        alert('There was a problem submitting your inquiry. Please try again.');
+      }
+    })
+    .catch((error) => {
+      console.error('Submission error:', error);
+      alert('There was an error sending your inquiry. Please check your connection.');
+    });
+  };
+
+  const showSuccessState = () => {
     // Hide input elements, display success
     stepsPanes.forEach(pane => pane.classList.add('hidden'));
     if (controlButtons) controlButtons.classList.add('hidden');
