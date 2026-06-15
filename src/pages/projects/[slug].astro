@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import { projects } from '../../data/projects';
+
+export async function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout 
+  title={`${project.title} — Artsterix`} 
+  description={project.description}
+>
+  <Header />
+  <main class="pt-[120px] pb-24 px-6 md:px-12 bg-brand-bg min-h-[100dvh]">
+    <div class="max-w-4xl mx-auto space-y-12">
+      <!-- Project Title Header -->
+      <div class="space-y-4">
+        <a href="/projects" class="font-mono text-xs uppercase text-brand-muted hover:text-brand-accent tracking-widest transition-colors duration-200">
+          &larr; Back to Projects
+        </a>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-brand-text leading-none uppercase">
+          {project.title}
+        </h1>
+        <div class="font-mono text-xs text-brand-muted uppercase tracking-wider">
+          {project.location}
+        </div>
+      </div>
+
+      <!-- Full-width Visual -->
+      <div class="w-full overflow-hidden aspect-[16/9] bg-stone-100">
+        <img 
+          src={project.image} 
+          alt={project.title} 
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Project Overview & Details Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 pt-6">
+        <!-- Overview Narrative -->
+        <div class="md:col-span-2 space-y-6">
+          <h2 class="text-xl font-bold tracking-tight text-brand-text">Overview</h2>
+          <p class="text-base text-brand-muted leading-relaxed max-w-[65ch]">
+            {project.description}
+          </p>
+        </div>
+
+        <!-- Specs Panel -->
+        <div class="space-y-6 md:border-l md:border-brand-border md:pl-8">
+          <h2 class="text-xl font-bold tracking-tight text-brand-text">Specifications</h2>
+          <div class="space-y-4 text-xs font-mono uppercase tracking-wider text-brand-muted">
+            <div>
+              <span class="text-brand-text block font-medium">Year</span>
+              {project.year}
+            </div>
+            <div>
+              <span class="text-brand-text block font-medium">Typology</span>
+              {project.type}
+            </div>
+            <div>
+              <span class="text-brand-text block font-medium">Area</span>
+              {project.specs.area}
+            </div>
+            <div>
+              <span class="text-brand-text block font-medium">Materials</span>
+              {project.specs.materials}
+            </div>
+            <div>
+              <span class="text-brand-text block font-medium">Structures</span>
+              {project.specs.engineer}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
