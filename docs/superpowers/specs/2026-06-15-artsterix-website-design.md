@@ -52,12 +52,12 @@ This design specification defines the visual language, layout structure, technol
 
 ### 5.1 Home Page (`/`)
 * **Hero Section:** Split-Screen (50vw text, 50vw visual) on desktop, collapsing to vertical on mobile.
-  - Left Column: Headline, subtext, and a single call-to-action button ("Inquire").
+  - Left Column: Headline, subtext, and a single call-to-action button linking to `/inquire` ("Start a Project").
   - Right Column: Large project visual (`hero_facade.png`).
 * **Philosophy Section:** Typography-centric single column (`max-w-[65ch]`) detailing structural ethos.
 * **Featured Projects Grid:** Asymmetric grid displaying 4 curated projects.
 * **Services/Disciplines:** 2-column horizontal split.
-* **Contact Section:** Bottom-line form inputs.
+* **Contact Section:** Minimal panel linking to `/inquire`.
 
 ### 5.2 Projects Index (`/projects`)
 * **Layout:** A visual index of all projects in the collection.
@@ -69,43 +69,18 @@ This design specification defines the visual language, layout structure, technol
   - Main hero image section showing the physical structure.
   - Architectural narrative (two-column text layout).
   - Specifications table showing details like: Area, Materials, and Engineers.
-  - **Staggered Editorial Media Gallery:** A vertical flow of high-resolution images and silent, looping architectural videos (`autoplay loop muted playsinline`) arranged in an asymmetric grid (e.g. 50/50 split and full-bleed rows).
+  - **Staggered Editorial Media Gallery:** A vertical flow of high-resolution images and silent, looping architectural videos (`autoplay loop muted playsinline`) arranged in an asymmetric grid.
+
+### 5.4 Dedicated Inquiry Page (`/inquire`)
+* **Layout:** A conversational, multi-step interactive form containing 20 curated questions grouped into 5 logical phases:
+  1. *Project Scope* (Typology, Services, Build Type)
+  2. *Parameters* (Location, Dimensions, Brief description)
+  3. *Preferences* (Vibe, Reference uploads)
+  4. *Budget & Schedule* (Earthy budgets, target timeline, areas)
+  5. *Client Identity* (Contact information, methods of contact)
+* **Styling:** 1 active step displayed at a time with horizontal progress tracker, sharp border custom tiles, and responsive slide controls.
 
 ---
 
 ## 6. Projects Data System & Schema
-To support quick insertions of your projects, all projects are registered in a database file: `src/data/projects.ts` containing the following schema:
-
-```typescript
-export interface ProjectMedia {
-  type: 'image' | 'video'; // Specifies format
-  url: string;             // File path (e.g., '/projects/pavilion-atrium.png')
-  caption?: string;        // Optional minimal caption
-  aspect?: string;         // Optional aspect ratio for staggered layouts (e.g., 'aspect-[3/4]')
-}
-
-export interface Project {
-  slug: string;        // URL path (e.g. 'concrete-pavilion')
-  id: string;          // Numeric code (e.g. '01')
-  title: string;       // Display name
-  year: string;        // Year completed
-  type: string;        // Category
-  image: string;       // Image URL
-  location: string;    // City, coordinates
-  description: string; // Detail narrative paragraph
-  specs: {             // Key parameters
-    area: string;
-    materials: string;
-    engineer: string;
-  };
-  gallery: ProjectMedia[]; // Array of staggered images and loop videos
-}
-```
-
-### Mock Project Collection
-1. **The Concrete Pavilion** (Residential, 2025)
-2. **Atrium House** (Residential, 2025)
-3. **Stone Monolith** (Residential, 2024)
-4. **Glass Canopy** (Workplace, 2024)
-5. **Desert Observatory** (Civic, 2026)
-6. **Coastal Library** (Civic, 2024)
+To support quick insertions of your projects, all projects are registered in a database file: `src/data/projects.ts` containing the project schemas and gallery mapping.
