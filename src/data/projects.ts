@@ -1,3 +1,10 @@
+export interface ProjectMedia {
+  type: 'image' | 'video';
+  url: string;
+  caption?: string;
+  aspect?: string;
+}
+
 export interface Project {
   slug: string;
   id: string;
@@ -12,6 +19,7 @@ export interface Project {
     materials: string;
     engineer: string;
   };
+  gallery: ProjectMedia[];
 }
 
 export const projects: Project[] = [
@@ -28,7 +36,27 @@ export const projects: Project[] = [
       area: '2,400 sq ft',
       materials: 'Board-formed concrete, tempered glass, white oak',
       engineer: 'Apex Structural Partners'
-    }
+    },
+    gallery: [
+      {
+        type: 'image',
+        url: '/concrete_pavilion.png',
+        caption: 'External raw concrete wall framing and tree canopy.',
+        aspect: 'aspect-[16/9]'
+      },
+      {
+        type: 'video',
+        url: 'https://assets.mixkit.co/videos/preview/mixkit-modern-apartment-building-facade-42250-large.mp4',
+        caption: 'Light shadow play moving across concrete volumes.',
+        aspect: 'aspect-[3/4]'
+      },
+      {
+        type: 'image',
+        url: '/hero_facade.png',
+        caption: 'Detail of structural columns and roof lines.',
+        aspect: 'aspect-[4/3]'
+      }
+    ]
   },
   {
     slug: 'atrium-house',
@@ -43,7 +71,21 @@ export const projects: Project[] = [
       area: '4,200 sq ft',
       materials: 'Earthy plaster walls, cedar framing, steel windows',
       engineer: 'Studio Delta Structures'
-    }
+    },
+    gallery: [
+      {
+        type: 'image',
+        url: '/atrium_house.png',
+        caption: 'Central garden atrium under midday light.',
+        aspect: 'aspect-[16/9]'
+      },
+      {
+        type: 'image',
+        url: '/stone_monolith.png',
+        caption: 'Living room entry framing the central courtyard.',
+        aspect: 'aspect-[4/3]'
+      }
+    ]
   },
   {
     slug: 'stone-monolith',
@@ -58,7 +100,21 @@ export const projects: Project[] = [
       area: '3,800 sq ft',
       materials: 'Stacked local slate, polished basalt, zinc roofing',
       engineer: 'Kari & Associates'
-    }
+    },
+    gallery: [
+      {
+        type: 'image',
+        url: '/stone_monolith.png',
+        caption: 'Bespoke hand-cut stone masonry walls.',
+        aspect: 'aspect-[16/9]'
+      },
+      {
+        type: 'image',
+        url: '/concrete_pavilion.png',
+        caption: 'External boundary retaining stone walls.',
+        aspect: 'aspect-[4/3]'
+      }
+    ]
   },
   {
     slug: 'glass-canopy',
@@ -73,7 +129,21 @@ export const projects: Project[] = [
       area: '5,500 sq ft',
       materials: 'Structural steel girders, high-transmission glass, teak decking',
       engineer: 'Loomis Engineering'
-    }
+    },
+    gallery: [
+      {
+        type: 'image',
+        url: '/glass_canopy.png',
+        caption: 'Cantilevered steel roof details.',
+        aspect: 'aspect-[16/9]'
+      },
+      {
+        type: 'image',
+        url: '/hero_facade.png',
+        caption: 'Office garden structural boundary lines.',
+        aspect: 'aspect-[4/3]'
+      }
+    ]
   },
   {
     slug: 'desert-observatory',
@@ -88,7 +158,21 @@ export const projects: Project[] = [
       area: '1,800 sq ft',
       materials: 'Rammed earth, weathering steel, concrete panels',
       engineer: 'Apex Structural Partners'
-    }
+    },
+    gallery: [
+      {
+        type: 'image',
+        url: '/desert_observatory.png',
+        caption: 'Observatory facade looking toward the sunset horizon.',
+        aspect: 'aspect-[16/9]'
+      },
+      {
+        type: 'image',
+        url: '/stone_monolith.png',
+        caption: 'Detail of rammed earth layering texture.',
+        aspect: 'aspect-[4/3]'
+      }
+    ]
   },
   {
     slug: 'coastal-library',
@@ -103,6 +187,20 @@ export const projects: Project[] = [
       area: '3,100 sq ft',
       materials: 'Cedar wood panels, structural glass columns, stone flooring',
       engineer: 'Studio Delta Structures'
-    }
+    },
+    gallery: [
+      {
+        type: 'image',
+        url: '/coastal_library.png',
+        caption: 'Cliffside entry overlooking the ocean.',
+        aspect: 'aspect-[16/9]'
+      },
+      {
+        type: 'image',
+        url: '/concrete_pavilion.png',
+        caption: 'Cedar ceiling panels blending with organic skylights.',
+        aspect: 'aspect-[4/3]'
+      }
+    ]
   }
 ];
