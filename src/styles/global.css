@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@theme {
+  --color-brand-bg: #FBFBF9;
+  --color-brand-text: #1A1A1A;
+  --color-brand-muted: #6E6E6E;
+  --color-brand-accent: #C15C3D;
+  --color-brand-border: #E5E5E0;
+
+  --font-sans: "Satoshi", "Geist Sans", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+}
+
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=geist-mono@300,400,500&display=swap');
+
+@layer base {
+  body {
+    background-color: var(--color-brand-bg);
+    color: var(--color-brand-text);
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Custom scrollbar matching the minimal palette */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-border);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-accent);
+}
