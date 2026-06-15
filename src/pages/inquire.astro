@@ -1,0 +1,549 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+---
+
+<Layout 
+  title="Project Inquiry — Artsterix" 
+  description="Begin your design journey. Share your spatial requirements, parameters, and design goals with the Artsterix design studio."
+>
+  <Header />
+  <main class="pt-[120px] pb-24 bg-brand-bg min-h-[100dvh] flex flex-col justify-center px-6 md:px-12">
+    <div class="max-w-3xl mx-auto w-full space-y-8">
+      
+      <!-- Wizard Progress Header -->
+      <div class="space-y-4">
+        <div class="flex justify-between items-end font-mono text-[10px] uppercase tracking-widest text-brand-muted">
+          <span>PROJECT INQUIRY FORM</span>
+          <span id="step-indicator">Step 1 of 5</span>
+        </div>
+        <!-- Simple custom progress bar line -->
+        <div class="w-full h-[1.5px] bg-brand-border">
+          <div id="progress-bar-line" class="h-full bg-brand-accent w-[20%] transition-all duration-500 ease-out"></div>
+        </div>
+      </div>
+
+      <form id="inquiry-form" class="space-y-12">
+        
+        <!-- STEP 1: Project Scope -->
+        <div class="step-pane space-y-8" data-step="1">
+          <div class="space-y-2">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-brand-text">01 / Scope</h1>
+            <p class="text-sm text-brand-muted">Define the architectural scope and core services required.</p>
+          </div>
+
+          <div class="space-y-6">
+            <!-- Q1: Typology -->
+            <div class="space-y-3">
+              <label class="text-xs uppercase font-mono tracking-wider text-brand-muted block">1. What type of project are you planning?</label>
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {['Residential', 'Commercial', 'Hospitality', 'Office', 'Retail', 'Other'].map((t) => (
+                  <label class="custom-tile border border-brand-border px-4 py-3 text-sm flex items-center justify-between cursor-pointer select-none transition-all duration-200 hover:border-brand-accent">
+                    <input type="radio" name="project_type" value={t} required class="sr-only" />
+                    <span>{t}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <!-- Q2: Service -->
+            <div class="space-y-3">
+              <label class="text-xs uppercase font-mono tracking-wider text-brand-muted block">2. What service are you interested in?</label>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {[
+                  'Architectural Design',
+                  'Interior Design',
+                  'Renovation/Remodeling',
+                  '3D Visualization & Rendering',
+                  'Construction Documentation',
+                  'Project Management',
+                  'Furniture & Décor Selection',
+                  'Full Design & Build Service'
+                ].map((s) => (
+                  <label class="custom-tile border border-brand-border px-4 py-3 text-sm flex items-center justify-between cursor-pointer select-none transition-all duration-200 hover:border-brand-accent">
+                    <input type="radio" name="service" value={s} required class="sr-only" />
+                    <span>{s}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <!-- Q3: Build Type -->
+            <div class="space-y-3">
+              <label class="text-xs uppercase font-mono tracking-wider text-brand-muted block">3. Is this a new build, renovation, or extension?</label>
+              <div class="grid grid-cols-3 gap-3">
+                {['New Build', 'Renovation', 'Extension'].map((b) => (
+                  <label class="custom-tile border border-brand-border px-4 py-3 text-sm flex items-center justify-between cursor-pointer select-none transition-all duration-200 hover:border-brand-accent text-center">
+                    <input type="radio" name="build_type" value={b} required class="sr-only" />
+                    <span class="w-full text-center">{b}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: Parameters -->
+        <div class="step-pane space-y-8 hidden" data-step="2">
+          <div class="space-y-2">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-brand-text">02 / Parameters</h1>
+            <p class="text-sm text-brand-muted">Provide the location metrics and goals of your site.</p>
+          </div>
+
+          <div class="space-y-6">
+            <!-- Q4: Location -->
+            <div class="flex flex-col space-y-1">
+              <label for="location" class="text-xs uppercase font-mono tracking-wider text-brand-muted">4. Where is the project located?</label>
+              <input 
+                type="text" 
+                id="location" 
+                name="location"
+                placeholder="e.g. Napa Valley, CA"
+                class="border-b border-brand-border focus:border-brand-accent bg-transparent outline-none transition-colors duration-300 py-3 text-brand-text font-sans placeholder:text-stone-300"
+              />
+            </div>
+
+            <!-- Q5: Size -->
+            <div class="flex flex-col space-y-1">
+              <label for="size" class="text-xs uppercase font-mono tracking-wider text-brand-muted">5. What is the estimated size of the project? (sqm/sqft or not sure)</label>
+              <input 
+                type="text" 
+                id="size" 
+                name="size"
+                placeholder="e.g. 3,500 sq ft or Not Sure"
+                class="border-b border-brand-border focus:border-brand-accent bg-transparent outline-none transition-colors duration-300 py-3 text-brand-text font-sans placeholder:text-stone-300"
+              />
+            </div>
+
+            <!-- Q6: Description -->
+            <div class="flex flex-col space-y-1">
+              <label for="description" class="text-xs uppercase font-mono tracking-wider text-brand-muted">6. Briefly describe your project and goals.</label>
+              <textarea 
+                id="description" 
+                name="description"
+                rows="4"
+                placeholder="Describe your design parameters, site traits, etc..."
+                class="border-b border-brand-border focus:border-brand-accent bg-transparent outline-none transition-colors duration-300 py-3 text-brand-text font-sans resize-none placeholder:text-stone-300"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Preferences -->
+        <div class="step-pane space-y-8 hidden" data-step="3">
+          <div class="space-y-2">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-brand-text">03 / Preferences</h1>
+            <p class="text-sm text-brand-muted">Set the aesthetic directions and reference files.</p>
+          </div>
+
+          <div class="space-y-6">
+            <!-- Q8: Feel/Vibe -->
+            <div class="space-y-3">
+              <label class="text-xs uppercase font-mono tracking-wider text-brand-muted block">8. How do you want the space to feel?</label>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {['Modern', 'Contemporary', 'Minimalist', 'Luxury', 'Warm & Cozy', 'Industrial', 'Scandinavian', 'Other'].map((v) => (
+                  <label class="custom-tile border border-brand-border px-4 py-3 text-sm flex items-center justify-between cursor-pointer select-none transition-all duration-200 hover:border-brand-accent">
+                    <input type="radio" name="vibe" value={v} class="sr-only" />
+                    <span>{v}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <!-- Q9: Inspiration / Pinterest -->
+            <div class="flex flex-col space-y-1">
+              <label for="inspiration" class="text-xs uppercase font-mono tracking-wider text-brand-muted">9. Pinterest boards, image links, or references</label>
+              <input 
+                type="text" 
+                id="inspiration" 
+                name="inspiration"
+                placeholder="e.g. https://pinterest.com/my-board"
+                class="border-b border-brand-border focus:border-brand-accent bg-transparent outline-none transition-colors duration-300 py-3 text-brand-text font-sans placeholder:text-stone-300"
+              />
+            </div>
+
+            <!-- Upload option -->
+            <div class="space-y-2">
+              <label class="text-xs uppercase font-mono tracking-wider text-brand-muted block">Or upload reference files</label>
+              <div class="border border-dashed border-brand-border p-6 text-center cursor-pointer hover:border-brand-accent transition-colors">
+                <input type="file" id="reference-files" multiple class="hidden" />
+                <label for="reference-files" class="cursor-pointer font-mono text-[11px] tracking-wide text-brand-muted">
+                  Drag and drop files here or click to browse
+                </label>
+              </div>
+            </div>
+
+            <!-- Q15: Specific Materials -->
+            <div class="flex flex-col space-y-1">
+              <label for="materials" class="text-xs uppercase font-mono tracking-wider text-brand-muted">15. Are there any specific materials, colors, or design elements you would like included?</label>
+              <textarea 
+                id="materials" 
+                name="materials"
+                rows="3"
+                placeholder="e.g. Raw board-formed concrete, cedar structural columns, daylight shafts..."
+                class="border-b border-brand-border focus:border-brand-accent bg-transparent outline-none transition-colors duration-300 py-3 text-brand-text font-sans resize-none placeholder:text-stone-300"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: Budget & Schedule -->
+        <div class="step-pane space-y-8 hidden" data-step="4">
+          <div class="space-y-2">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-brand-text">04 / Budget & Schedule</h1>
+            <p class="text-sm text-brand-muted">Outline your budget ranges and completion milestones.</p>
+          </div>
+
+          <div class="space-y-6">
+            <!-- Q10: Budget -->
+            <div class="space-y-3">
+              <label class="text-xs uppercase font-mono tracking-wider text-brand-muted block">10. What is your estimated budget range?</label>
+              <div class="space-y-3">
+                <label class="custom-tile border border-brand-border px-6 py-4 flex items-center cursor-pointer select-none transition-all duration-200 hover:border-brand-accent">
+                  <input type="radio" name="budget" value="Under ₦10M" class="sr-only" />
+                  <span>Under ₦10M</span>
+                </label>
+                
+                <label class="custom-tile border border-brand-border px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer select-none transition-all duration-200 hover:border-brand-accent">
+                  <div class="flex items-center space-x-2">
+                    <input type="radio" name="budget" id="budget-custom-radio" value="Custom" class="sr-only" />
+                    <span>₦ Custom Budget:</span>
+                  </div>
+                  <input 
+                    type="text" 
+                    id="budget-custom-val" 
+                    placeholder="Enter amount (e.g. 50M)"
+                    class="border-b border-brand-border bg-transparent outline-none w-full md:w-48 text-brand-text text-sm pb-1 placeholder:text-stone-300 focus:border-brand-accent"
+                  />
+                </label>
+
+                <label class="custom-tile border border-brand-border px-6 py-4 flex items-center cursor-pointer select-none transition-all duration-200 hover:border-brand-accent">
+                  <input type="radio" name="budget" value="Prefer Not to Say" class="sr-only" />
+                  <span>Prefer Not to Say</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Q11 & Q12: Dates -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="flex flex-col space-y-1">
+                <label for="start_date" class="text-xs uppercase font-mono tracking-wider text-brand-muted">11. When would you like the project to begin?</label>
+                <input 
+                  type="text" 
+                  id="start_date" 
+                  name="start_date"
+                  placeholder="e.g. Immediate or Sept 2026"
+                  class="border-b border-brand-border focus:border-brand-accent bg-transparent outline-none transition-colors duration-300 py-3 text-brand-text font-sans placeholder:text-stone-300"
+                />
+              </div>
+
+              <div class="flex flex-col space-y-1">
+                <label for="completion_date" class="text-xs uppercase font-mono tracking-wider text-brand-muted">12. Is there a target completion date?</label>
+                <input 
+                  type="text" 
+                  id="completion_date" 
+                  name="completion_date"
+                  placeholder="e.g. Within 12 months"
+                  class="border-b border-brand-border focus:border-brand-accent bg-transparent outline-none transition-colors duration-300 py-3 text-brand-text font-sans placeholder:text-stone-300"
+                />
+              </div>
+            </div>
+
+            <!-- Q13: Areas -->
+            <div class="space-y-3">
+              <label class="text-xs uppercase font-mono tracking-wider text-brand-muted block">13. Which areas need design services? (Select all that apply)</label>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {['Living Room', 'Kitchen', 'Bedroom(s)', 'Bathroom(s)', 'Office', 'Outdoor Area', 'Entire Property'].map((area) => (
+                  <label class="custom-tile border border-brand-border px-4 py-3 text-sm flex items-center justify-between cursor-pointer select-none transition-all duration-200 hover:border-brand-accent">
+                    <input type="checkbox" name="areas" value={area} class="sr-only" />
+                    <span>{area}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5: Client Identity -->
+        <div class="step-pane space-y-8 hidden" data-step="5">
+          <div class="space-y-2">
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-brand-text">05 / Identity</h1>
+            <p class="text-sm text-brand-muted">Provide your primary contact coordinates.</p>
+          </div>
+
+          <div class="space-y-6">
+            <!-- Q16: Full Name -->
+            <div class="flex flex-col space-y-1">
+              <label for="fullname" class="text-xs uppercase font-mono tracking-wider text-brand-muted">16. Full Name</label>
+              <input 
+                type="text" 
+                id="fullname" 
+                name="fullname"
+                required
+                placeholder="Alex Martin"
+                class="border-b border-brand-border focus:border-brand-accent bg-transparent outline-none transition-colors duration-300 py-3 text-brand-text font-sans placeholder:text-stone-300"
+              />
+            </div>
+
+            <!-- Q17: Email Address -->
+            <div class="flex flex-col space-y-1">
+              <label for="email" class="text-xs uppercase font-mono tracking-wider text-brand-muted">17. Email Address</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email"
+                required
+                placeholder="alex@example.com"
+                class="border-b border-brand-border focus:border-brand-accent bg-transparent outline-none transition-colors duration-300 py-3 text-brand-text font-sans placeholder:text-stone-300"
+              />
+            </div>
+
+            <!-- Q18: Phone Number -->
+            <div class="flex flex-col space-y-1">
+              <label for="phone" class="text-xs uppercase font-mono tracking-wider text-brand-muted">18. Phone Number</label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone"
+                required
+                placeholder="+1 (650) 492-3840"
+                class="border-b border-brand-border focus:border-brand-accent bg-transparent outline-none transition-colors duration-300 py-3 text-brand-text font-sans placeholder:text-stone-300"
+              />
+            </div>
+
+            <!-- Q19: Preferred Method of Communication -->
+            <div class="space-y-3">
+              <label class="text-xs uppercase font-mono tracking-wider text-brand-muted block">19. Preferred Method of Communication</label>
+              <div class="grid grid-cols-3 gap-3">
+                {['Phone Call', 'WhatsApp', 'Email'].map((method) => (
+                  <label class="custom-tile border border-brand-border px-4 py-3 text-sm flex items-center justify-between cursor-pointer select-none transition-all duration-200 hover:border-brand-accent">
+                    <input type="radio" name="pref_communication" value={method} class="sr-only" />
+                    <span class="w-full text-center">{method}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <!-- Q20: Referral -->
+            <div class="space-y-3">
+              <label class="text-xs uppercase font-mono tracking-wider text-brand-muted block">20. How did you hear about us?</label>
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {['Instagram', 'Facebook', 'Google Search', 'Referral', 'Website', 'Other'].map((ref) => (
+                  <label class="custom-tile border border-brand-border px-4 py-3 text-sm flex items-center justify-between cursor-pointer select-none transition-all duration-200 hover:border-brand-accent">
+                    <input type="radio" name="referral" value={ref} class="sr-only" />
+                    <span>{ref}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Success Screen (Hidden initially) -->
+        <div id="success-pane" class="space-y-6 py-12 text-center hidden">
+          <div class="text-brand-accent text-5xl">✓</div>
+          <h1 class="text-3xl font-bold tracking-tighter text-brand-text">Inquiry Submitted</h1>
+          <p class="text-base text-brand-muted max-w-[50ch] mx-auto leading-relaxed">
+            Thank you. Your spatial parameters and design targets have been submitted. Our Palo Alto studio will review the scope and contact you within 3 business days.
+          </p>
+          <div class="pt-6">
+            <a href="/" class="inline-block px-8 py-3 bg-brand-text text-brand-bg font-medium text-sm hover:bg-brand-accent transition-colors duration-300 tracking-wide">
+              Return Home
+            </a>
+          </div>
+        </div>
+
+        <!-- Controls (Back / Next Buttons) -->
+        <div id="control-buttons" class="flex justify-between items-center pt-8 border-t border-brand-border">
+          <button 
+            type="button" 
+            id="back-btn" 
+            class="px-6 py-3 border border-brand-border text-brand-text text-sm font-medium hover:border-brand-accent hover:text-brand-accent transition-colors duration-200 invisible"
+          >
+            &larr; Back
+          </button>
+          
+          <button 
+            type="button" 
+            id="next-btn" 
+            class="px-8 py-3 bg-brand-text text-brand-bg text-sm font-medium hover:bg-brand-accent transition-colors duration-300"
+          >
+            Next &rarr;
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Selected tile style toggle classes */
+  .custom-tile-active {
+    border-color: var(--color-brand-accent) !important;
+    background-color: rgba(193, 92, 61, 0.05) !important;
+  }
+</style>
+
+<script>
+  let currentStep = 1;
+  const totalSteps = 5;
+
+  const stepsPanes = document.querySelectorAll('.step-pane');
+  const stepIndicator = document.getElementById('step-indicator');
+  const progressBarLine = document.getElementById('progress-bar-line');
+  const backBtn = document.getElementById('back-btn') as HTMLButtonElement;
+  const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
+  const controlButtons = document.getElementById('control-buttons');
+  const successPane = document.getElementById('success-pane');
+  const form = document.getElementById('inquiry-form') as HTMLFormElement;
+
+  // Custom tiles selection toggles
+  document.querySelectorAll('.custom-tile').forEach((tile) => {
+    const input = tile.querySelector('input');
+    
+    // Toggle active state classes based on state changes
+    input?.addEventListener('change', () => {
+      // For radio fields, clear sibling options
+      if (input.type === 'radio') {
+        const name = input.name;
+        document.querySelectorAll(`input[name="${name}"]`).forEach((sib) => {
+          sib.closest('.custom-tile')?.classList.remove('custom-tile-active');
+        });
+      }
+      
+      if (input.checked) {
+        tile.classList.add('custom-tile-active');
+      } else {
+        tile.classList.remove('custom-tile-active');
+      }
+    });
+  });
+
+  // Custom budget sync logic
+  const budgetCustomRadio = document.getElementById('budget-custom-radio') as HTMLInputElement;
+  const budgetCustomVal = document.getElementById('budget-custom-val') as HTMLInputElement;
+
+  budgetCustomVal?.addEventListener('focus', () => {
+    budgetCustomRadio.checked = true;
+    // Clear other options styling
+    document.querySelectorAll('input[name="budget"]').forEach((sib) => {
+      if (sib !== budgetCustomRadio) {
+        sib.closest('.custom-tile')?.classList.remove('custom-tile-active');
+      }
+    });
+    budgetCustomRadio.closest('.custom-tile')?.classList.add('custom-tile-active');
+  });
+
+  budgetCustomVal?.addEventListener('input', () => {
+    budgetCustomRadio.value = `Custom: ${budgetCustomVal.value}`;
+  });
+
+  // Step validation rules
+  const validateStep = (step: number) => {
+    const pane = document.querySelector(`.step-pane[data-step="${step}"]`);
+    if (!pane) return true;
+
+    const inputs = pane.querySelectorAll('input[required], textarea[required]');
+    let isValid = true;
+
+    inputs.forEach((input) => {
+      const el = input as HTMLInputElement;
+      if (el.type === 'radio') {
+        const name = el.name;
+        const checked = pane.querySelector(`input[name="${name}"]:checked`);
+        if (!checked) {
+          isValid = false;
+          // Apply shake/error indicator to tiles
+          pane.querySelectorAll(`input[name="${name}"]`).forEach((radio) => {
+            radio.closest('.custom-tile')?.classList.add('border-red-500');
+            setTimeout(() => {
+              radio.closest('.custom-tile')?.classList.remove('border-red-500');
+            }, 1000);
+          });
+        }
+      } else if (!el.value.trim()) {
+        isValid = false;
+        el.classList.add('border-red-500');
+        setTimeout(() => el.classList.remove('border-red-500'), 1000);
+      }
+    });
+
+    return isValid;
+  };
+
+  const updateWizard = () => {
+    // Show/hide step panes
+    stepsPanes.forEach((pane) => {
+      const stepNum = parseInt(pane.getAttribute('data-step') || '0');
+      if (stepNum === currentStep) {
+        pane.classList.remove('hidden');
+      } else {
+        pane.classList.add('hidden');
+      }
+    });
+
+    // Update progress markers
+    if (stepIndicator) stepIndicator.textContent = `Step ${currentStep} of ${totalSteps}`;
+    if (progressBarLine) progressBarLine.style.width = `${(currentStep / totalSteps) * 100}%`;
+
+    // Manage control buttons visibility/labels
+    if (currentStep === 1) {
+      backBtn?.classList.add('invisible');
+    } else {
+      backBtn?.classList.remove('invisible');
+    }
+
+    if (currentStep === totalSteps) {
+      if (nextBtn) nextBtn.textContent = 'Submit Inquire &rarr;';
+    } else {
+      if (nextBtn) nextBtn.textContent = 'Next &rarr;';
+    }
+  };
+
+  // Click handlers
+  nextBtn?.addEventListener('click', () => {
+    // Validate current step before advancing
+    if (!validateStep(currentStep)) return;
+
+    if (currentStep < totalSteps) {
+      currentStep++;
+      updateWizard();
+    } else {
+      // Final Submit action
+      handleSubmit();
+    }
+  });
+
+  backBtn?.addEventListener('click', () => {
+    if (currentStep > 1) {
+      currentStep--;
+      updateWizard();
+    }
+  });
+
+  const handleSubmit = () => {
+    // Collect form data objects
+    const formData = new FormData(form);
+    const data: any = {};
+    formData.forEach((value, key) => {
+      if (key === 'areas') {
+        if (!data[key]) data[key] = [];
+        data[key].push(value);
+      } else {
+        data[key] = value;
+      }
+    });
+
+    // Output simulated submission data to console
+    console.log('Artsterix Inquiry Data Submitted:', data);
+
+    // Hide input elements, display success
+    stepsPanes.forEach(pane => pane.classList.add('hidden'));
+    if (controlButtons) controlButtons.classList.add('hidden');
+    if (successPane) successPane.classList.remove('hidden');
+    
+    // Reset wizard indicator to 100%
+    if (progressBarLine) progressBarLine.style.width = '100%';
+    if (stepIndicator) stepIndicator.textContent = 'Submission Complete';
+  };
+</script>
