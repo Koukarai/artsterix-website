@@ -156,7 +156,7 @@ export default async function handler(req, res) {
       <body>
         <div class="container">
           <div class="header">
-            <img src="cid:logo" alt="ARTSTERIX" height="32" style="display:block; max-height:32px;" />
+            <img src="cid:logo" alt="ARTSTERIX" height="120" style="display:block; height:120px; width:auto;" />
             <span style="font-family:monospace; font-size:10px; color:#6E6E6E;">
               ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </span>

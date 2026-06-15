@@ -26,3 +26,6 @@ pnpm-debug.log*
 
 # design documentation
 docs/
+
+# email preview helper
+public/email-preview.html
