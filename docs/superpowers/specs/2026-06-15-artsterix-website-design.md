@@ -69,6 +69,7 @@ This design specification defines the visual language, layout structure, technol
   - Main hero image section showing the physical structure.
   - Architectural narrative (two-column text layout).
   - Specifications table showing details like: Area, Materials, and Engineers.
+  - **Staggered Editorial Media Gallery:** A vertical flow of high-resolution images and silent, looping architectural videos (`autoplay loop muted playsinline`) arranged in an asymmetric grid (e.g. 50/50 split and full-bleed rows).
 
 ---
 
@@ -76,6 +77,13 @@ This design specification defines the visual language, layout structure, technol
 To support quick insertions of your projects, all projects are registered in a database file: `src/data/projects.ts` containing the following schema:
 
 ```typescript
+export interface ProjectMedia {
+  type: 'image' | 'video'; // Specifies format
+  url: string;             // File path (e.g., '/projects/pavilion-atrium.png')
+  caption?: string;        // Optional minimal caption
+  aspect?: string;         // Optional aspect ratio for staggered layouts (e.g., 'aspect-[3/4]')
+}
+
 export interface Project {
   slug: string;        // URL path (e.g. 'concrete-pavilion')
   id: string;          // Numeric code (e.g. '01')
@@ -90,6 +98,7 @@ export interface Project {
     materials: string;
     engineer: string;
   };
+  gallery: ProjectMedia[]; // Array of staggered images and loop videos
 }
 ```
 
@@ -98,5 +107,5 @@ export interface Project {
 2. **Atrium House** (Residential, 2025)
 3. **Stone Monolith** (Residential, 2024)
 4. **Glass Canopy** (Workplace, 2024)
-5. **Desert Observatory** (Civic, 2026) — Rammed-earth observatory in Joshua Tree.
-6. **Coastal Library** (Civic, 2024) — Cedar and glass reading pavilion on the Oregon coast.
+5. **Desert Observatory** (Civic, 2026)
+6. **Coastal Library** (Civic, 2024)
