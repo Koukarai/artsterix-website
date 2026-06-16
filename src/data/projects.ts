@@ -111,7 +111,7 @@ export const projects: Project[] = [
       },
       {
         type: 'image',
-        url: '/6_bedroom_residential_development_with_a_pent_house.webp',
+        url: '/projects/House/bedroom.webp',
         caption: 'External boundary retaining stone walls.',
         aspect: 'aspect-[4/3]'
       }

@@ -94,7 +94,7 @@ const { project } = Astro.props;
               
               return (
                 <div class={`flex flex-col space-y-3 ${gridClass}`}>
-                  <div class={`w-full overflow-hidden ${aspectClass} bg-stone-100`}>
+                  <div class={`w-full bg-stone-100 ${media.type === 'video' ? `${aspectClass} overflow-hidden` : ''}`}>
                     {media.type === 'video' ? (
                       <video 
                         src={media.url}
@@ -108,7 +108,7 @@ const { project } = Astro.props;
                       <img 
                         src={media.url} 
                         alt={media.caption || project.title} 
-                        class="w-full h-full object-cover"
+                        class="w-full h-auto block"
                       />
                     )}
                   </div>
