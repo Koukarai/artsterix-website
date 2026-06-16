@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import ComparisonSlider from "../components/ComparisonSlider.astro";
+---
+
+<Layout
+  title="Render Process — Artsterix"
+  description="Compare structural clay models (Lambert) directly with finished photorealistic material renders for Artsterix architectural commissions."
+>
+  <Header />
+  <main class="pt-[120px] pb-24 px-6 md:px-12 bg-brand-bg min-h-[100dvh]">
+    <div class="max-w-4xl mx-auto space-y-16">
+      <!-- Page Header -->
+      <div class="space-y-4 max-w-[55ch]">
+        <span
+          class="font-mono text-[10px] tracking-[0.2em] text-brand-accent uppercase"
+          >DESIGN WORKFLOW</span
+        >
+        <h1
+          class="text-4xl md:text-5xl font-bold tracking-tighter text-brand-text"
+        >
+          Lambert to Material
+        </h1>
+        <p class="text-base text-brand-muted leading-relaxed">
+          Every commission begins with pure spatial geometry. Drag the vertical
+          divider on the Atrium House to peel back the material layer and
+          inspect the underlying raw structure.
+        </p>
+      </div>
+
+      <!-- Renders Showcase List -->
+      <div class="space-y-24">
+        <div class="space-y-4">
+          <!-- Slider Container -->
+          <ComparisonSlider
+            title="6 bedroom residential development with a pent house"
+            year="2025"
+            materialImage="/projects/renders/house-render.webp"
+            clayImage="/projects/renders/house-clay.webp"
+          />
+
+          <!-- Project Meta Details -->
+          <div
+            class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 font-mono text-[11px] text-brand-muted border-t border-brand-border/40 pt-4"
+          >
+            <div class="space-y-1">
+              <span class="text-brand-text font-medium block uppercase"
+                >01 &middot; 6 bedroom residential development with a pent house</span
+              >
+              <span class="block"
+                >NAPA VALLEY, CA (38.2975° N, 122.2864° W)</span
+              >
+            </div>
+            <div class="sm:text-right space-y-1">
+              <span class="block uppercase"
+                >MATERIALS: EARTHY PLASTER, CEDAR FRAMING, STEEL WINDOWS</span
+              >
+              <span class="block uppercase">YEAR: 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -29,3 +29,6 @@ docs/
 
 # email preview helper
 public/email-preview.html
+
+# superpowers helper
+.superpowers/

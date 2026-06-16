@@ -20,6 +20,7 @@ export interface Project {
     engineer: string;
   };
   gallery: ProjectMedia[];
+  clayImage?: string; // Optional clay render image
 }
 
 export const projects: Project[] = [

@@ -1,0 +1,131 @@
+---
+interface Props {
+  title: string;
+  year: string;
+  materialImage: string;
+  clayImage?: string;
+}
+
+const { title, year, materialImage, clayImage } = Astro.props;
+---
+
+<div class="relative w-full aspect-video overflow-hidden border border-brand-border select-none slider-container bg-stone-100 group">
+  <!-- Clay Render (Bottom Layer) -->
+  <div class="absolute inset-0 w-full h-full z-1">
+    {clayImage ? (
+      <img 
+        src={clayImage} 
+        alt={`Clay render of ${title}`} 
+        class="w-full h-full object-cover pointer-events-none" 
+      />
+    ) : (
+      <img 
+        src={materialImage} 
+        alt={`Clay render of ${title} (simulated)`} 
+        class="w-full h-full object-cover pointer-events-none grayscale brightness-[1.05] contrast-[0.95]" 
+      />
+    )}
+    <div class="absolute bottom-4 left-4 z-10 px-2 py-1 bg-black/60 text-white font-mono text-[9px] tracking-widest uppercase pointer-events-none">
+      Structure (Lambert)
+    </div>
+  </div>
+
+  <!-- Material Render (Top Layer, Clipped) -->
+  <div class="absolute inset-0 h-full overflow-hidden z-2 slider-foreground border-r border-brand-accent" style="width: 50%;">
+    <div class="absolute inset-0 w-full h-full pointer-events-none slider-material-wrapper">
+      <img 
+        src={materialImage} 
+        alt={`Material render of ${title}`} 
+        class="absolute inset-0 w-full h-full object-cover max-w-none slider-material-img" 
+      />
+    </div>
+    <div class="absolute bottom-4 right-4 z-10 px-2 py-1 bg-brand-accent text-white font-mono text-[9px] tracking-widest uppercase pointer-events-none">
+      Material Render
+    </div>
+  </div>
+
+  <!-- Terracotta Drag Handle -->
+  <div class="absolute top-0 bottom-0 z-3 cursor-ew-resize -translate-x-1/2 slider-handle" style="left: 50%;">
+    <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-brand-accent flex items-center justify-center shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95">
+      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+      </svg>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initSliders() {
+    const containers = document.querySelectorAll('.slider-container');
+    
+    containers.forEach(container => {
+      const foreground = container.querySelector('.slider-foreground') as HTMLElement;
+      const handle = container.querySelector('.slider-handle') as HTMLElement;
+      const materialImg = container.querySelector('.slider-material-img') as HTMLElement;
+      const wrapper = container.querySelector('.slider-material-wrapper') as HTMLElement;
+      
+      if (!foreground || !handle || !materialImg || !wrapper) return;
+
+      function updateDimensions() {
+        const rect = container.getBoundingClientRect();
+        materialImg.style.width = `${rect.width}px`;
+        materialImg.style.height = `${rect.height}px`;
+        wrapper.style.width = `${rect.width}px`;
+        wrapper.style.height = `${rect.height}px`;
+      }
+
+      // Initialize and bind window resize
+      updateDimensions();
+      window.addEventListener('resize', updateDimensions);
+
+      let isDragging = false;
+
+      function move(clientX: number) {
+        const rect = container.getBoundingClientRect();
+        let x = clientX - rect.left;
+        if (x < 0) x = 0;
+        if (x > rect.width) x = rect.width;
+
+        const pct = (x / rect.width) * 100;
+        foreground.style.width = `${pct}%`;
+        handle.style.left = `${pct}%`;
+      }
+
+      // Event listeners
+      container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        move((e as MouseEvent).clientX);
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        move(e.clientX);
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      // Touch events
+      container.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        move((e as TouchEvent).touches[0].clientX);
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        move((e as TouchEvent).touches[0].clientX);
+      }, { passive: true });
+
+      window.addEventListener('touchend', () => {
+        isDragging = false;
+      });
+    });
+  }
+
+  // Run on first load
+  initSliders();
+  
+  // Support Astro View Transitions if enabled
+  document.addEventListener('astro:page-load', initSliders);
+</script>
