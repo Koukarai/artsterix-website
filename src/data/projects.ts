@@ -25,40 +25,35 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: 'concrete-pavilion',
+    slug: 'master-bedroom',
     id: '01',
-    title: 'THE CONCRETE PAVILION',
+    title: 'MASTER BEDROOM',
     year: '2025',
     type: 'RESIDENTIAL',
-    image: '/concrete_pavilion.png',
+    image: '/projects/House/bedroom.webp',
     location: 'Palo Alto, CA (37.4419° N, 122.1430° W)',
-    description: 'A brutalist-inspired single-story pavilion designed to disappear into a surrounding pine forest. The construction employs board-formed concrete walls, massive glass panels, and local white oak columns to forge a quiet connection between interior spaces and organic forest light.',
+    description: 'Master bedroom showcases a modern, luxury design defined by a refined, earthy color palette and a harmonious blend of textures. The master bedroom’s large windows frame views of the surrounding greenery, bringing the outdoors in and creating a tranquil sanctuary. The room is designed to feel spacious and airy with clean lines and minimal clutter.',
     specs: {
       area: '2,400 sq ft',
-      materials: 'Board-formed concrete, tempered glass, white oak',
-      engineer: 'Apex Structural Partners'
+      materials: 'Wallpaper, glass, white oak',
+      engineer: 'Artsterix'
     },
     gallery: [
       {
         type: 'image',
-        url: '/concrete_pavilion.png',
-        caption: 'External raw concrete wall framing and tree canopy.',
-        aspect: 'aspect-[16/9]'
-      },
-      {
-        type: 'video',
-        url: 'https://assets.mixkit.co/videos/preview/mixkit-modern-apartment-building-facade-42250-large.mp4',
-        caption: 'Light shadow play moving across concrete volumes.',
-        aspect: 'aspect-[3/4]'
+        url: '/projects/House/bedroom.webp',
+        caption: 'Master bedroom with an ensuite bathroom and walk-in closet.',
+        aspect: 'aspect-[4/3]'
       },
       {
         type: 'image',
-        url: '/hero_facade.png',
-        caption: 'Detail of structural columns and roof lines.',
+        url: '/projects/House/dining_set1.webp',
+        caption: 'A minimalist dining area with earthy tones and a tranquil atmosphere.',
         aspect: 'aspect-[4/3]'
       }
     ]
   },
+
   {
     slug: 'atrium-house',
     id: '02',
@@ -108,12 +103,6 @@ export const projects: Project[] = [
         url: '/6_bedroom_residential_development_with_a_pent_house.webp',
         caption: 'Bespoke hand-cut stone masonry walls.',
         aspect: 'aspect-[16/9]'
-      },
-      {
-        type: 'image',
-        url: '/projects/House/bedroom.webp',
-        caption: 'External boundary retaining stone walls.',
-        aspect: 'aspect-[4/3]'
       }
     ]
   },
