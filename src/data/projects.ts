@@ -89,29 +89,29 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: 'stone-monolith',
+    slug: '6 bedroom residential development with a pent house',
     id: '03',
-    title: 'STONE MONOLITH',
-    year: '2024',
+    title: '6 bedroom residential development with a pent house',
+    year: '2025',
     type: 'RESIDENTIAL',
-    image: '/stone_monolith.png',
+    image: '/6_bedroom_residential_development_with_a_pent_house.webp',
     location: 'Santa Barbara, CA (34.4208° N, 119.6982° W)',
-    description: 'Perched on a structural coastal slope, this home utilizes thick horizontal layers of stacked dry stone. The thermal mass blocks high daytime heat, while narrow slot window openings capture framing canyon views.',
+    description: '6 bedroom residential development with a pent house.',
     specs: {
       area: '3,800 sq ft',
       materials: 'Stacked local slate, polished basalt, zinc roofing',
-      engineer: 'Kari & Associates'
+      engineer: 'Ajiro Akugha'
     },
     gallery: [
       {
         type: 'image',
-        url: '/stone_monolith.png',
+        url: '/6_bedroom_residential_development_with_a_pent_house.webp',
         caption: 'Bespoke hand-cut stone masonry walls.',
         aspect: 'aspect-[16/9]'
       },
       {
         type: 'image',
-        url: '/concrete_pavilion.png',
+        url: '/6_bedroom_residential_development_with_a_pent_house.webp',
         caption: 'External boundary retaining stone walls.',
         aspect: 'aspect-[4/3]'
       }
