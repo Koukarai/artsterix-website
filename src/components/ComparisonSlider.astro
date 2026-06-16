@@ -31,14 +31,15 @@ const { title, year, materialImage, clayImage } = Astro.props;
   </div>
 
   <!-- Material Render (Top Layer, Clipped) -->
-  <div class="absolute inset-0 h-full overflow-hidden z-2 slider-foreground border-r border-brand-accent" style="width: 50%;">
-    <div class="absolute inset-0 w-full h-full pointer-events-none slider-material-wrapper">
-      <img 
-        src={materialImage} 
-        alt={`Material render of ${title}`} 
-        class="absolute inset-0 w-full h-full object-cover max-w-none slider-material-img" 
-      />
-    </div>
+  <div 
+    class="absolute inset-0 w-full h-full overflow-hidden z-2 slider-foreground" 
+    style="clip-path: inset(0 50% 0 0);"
+  >
+    <img 
+      src={materialImage} 
+      alt={`Material render of ${title}`} 
+      class="w-full h-full object-cover pointer-events-none" 
+    />
     <div class="absolute bottom-4 right-4 z-10 px-2 py-1 bg-brand-accent text-white font-mono text-[9px] tracking-widest uppercase pointer-events-none">
       Material Render
     </div>
@@ -46,6 +47,10 @@ const { title, year, materialImage, clayImage } = Astro.props;
 
   <!-- Terracotta Drag Handle -->
   <div class="absolute top-0 bottom-0 z-3 cursor-ew-resize -translate-x-1/2 slider-handle" style="left: 50%;">
+    <!-- Vertical Divider Line -->
+    <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-brand-accent"></div>
+    
+    <!-- Handle Button -->
     <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-brand-accent flex items-center justify-center shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95">
       <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
@@ -61,22 +66,8 @@ const { title, year, materialImage, clayImage } = Astro.props;
     containers.forEach(container => {
       const foreground = container.querySelector('.slider-foreground') as HTMLElement;
       const handle = container.querySelector('.slider-handle') as HTMLElement;
-      const materialImg = container.querySelector('.slider-material-img') as HTMLElement;
-      const wrapper = container.querySelector('.slider-material-wrapper') as HTMLElement;
       
-      if (!foreground || !handle || !materialImg || !wrapper) return;
-
-      function updateDimensions() {
-        const rect = container.getBoundingClientRect();
-        materialImg.style.width = `${rect.width}px`;
-        materialImg.style.height = `${rect.height}px`;
-        wrapper.style.width = `${rect.width}px`;
-        wrapper.style.height = `${rect.height}px`;
-      }
-
-      // Initialize and bind window resize
-      updateDimensions();
-      window.addEventListener('resize', updateDimensions);
+      if (!foreground || !handle) return;
 
       let isDragging = false;
 
@@ -87,7 +78,7 @@ const { title, year, materialImage, clayImage } = Astro.props;
         if (x > rect.width) x = rect.width;
 
         const pct = (x / rect.width) * 100;
-        foreground.style.width = `${pct}%`;
+        foreground.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
         handle.style.left = `${pct}%`;
       }
 
